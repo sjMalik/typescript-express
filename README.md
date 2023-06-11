@@ -3,6 +3,7 @@
 * morgan - Logger
 * helmet - Helmet helps secure Express apps by setting HTTP response headers.
 * dotenv - Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env
+* @types/node, @types/express etc are the packages contains the type defintion of node, express etc.
 
 
 ## Steps
