@@ -2,7 +2,11 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
+
 import MessageResponse from './interfaces/MessageResponse';
+import * as middleware from './middleware';
+import api from './api';
+import todos from './api/todos/todos.routes';
 
 const app = express();
 
@@ -16,5 +20,11 @@ app.get<{}, MessageResponse>('/', (req, res)=> {
         message: 'Hello TS Express'
     })
 });
+
+app.use('/api/v1', api);
+app.use('/api/v1/todos', todos);
+
+app.use(middleware.NotFound);
+app.use(middleware.errorHandler);
 
 export default app;
