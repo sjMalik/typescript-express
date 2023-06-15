@@ -2,6 +2,10 @@ import request from 'supertest';
 
 import app from './app';
 
+beforeEach(()=> {
+    jest.useFakeTimers()
+})
+
 describe('app', ()=> {
     it('Response with 404', (done)=> {
         request(app)

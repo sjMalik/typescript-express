@@ -24,7 +24,7 @@ app.get<{}, MessageResponse>('/', (req, res)=> {
 app.use('/api/v1', api);
 app.use('/api/v1/todos', todos);
 
-app.use(middleware.NotFound);
+app.use(middleware.notFound);
 app.use(middleware.errorHandler);
 
 export default app;

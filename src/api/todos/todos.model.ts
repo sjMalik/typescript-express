@@ -3,13 +3,14 @@ import {db} from '../../db';
 
 import {WithId} from 'mongodb';
 
-const Todo = z.object({
+// export todo as schemavalidator
+export const Todo = z.object({
     content: z.string().min(1),
     done: z.boolean().default(false)
 });
 
 // Basic interface to describe this type
-// Export Todo Type
+// Export Todo as type checker
 export type Todo = z.infer<typeof Todo>;
 
 // db.collection supports generics so we cab pass in the type. We specifically typed this in Todo

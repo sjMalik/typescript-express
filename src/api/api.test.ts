@@ -2,6 +2,10 @@ import request from 'supertest';
 
 import app from '../app';
 
+beforeEach(()=> {
+    jest.useFakeTimers()
+})
+
 describe('API testing', ()=> {
     it('GET /api/v1/', ()=> {
         request(app)
