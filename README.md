@@ -33,6 +33,12 @@ Zod is designed to be as developer-friendly as possible. The goal is to eliminat
             })
         ```
 
+* db.collection.find(query, projection, options) - Selects documents in a collection or view and returns a cursor to the selected documents.
+
+    [Reference](https://www.mongodb.com/docs/manual/reference/method/db.collection.find/#examples)
+
+* Status code 204 - HTTP Status 204 (No Content) indicates that the server has successfully fulfilled the request and that there is no content to send in the response payload body.
+
 
 ## Steps
 1. init node project

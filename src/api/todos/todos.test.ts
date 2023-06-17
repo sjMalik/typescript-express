@@ -92,4 +92,81 @@ describe('GET /api/v1/todos/:id', ()=> {
             .expect('Content-Type', /json/)
             .expect(404, done);
     })
+});
+
+describe('Put /api/v1/todos/:id', ()=> {
+    it('respond with invalid object error', (done)=> {
+        request(app)
+            .put('/api/v1/todos/avdhshdbhs')
+            .send({
+                content: 'Learn Typescript',
+                done: true
+            })
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(422, done)
+    })
+
+    it('respond with notfound error', (done)=> {
+        request(app)
+            .put(`/api/v1/todos/6306d061477bdb46f9c57fa4`)
+            .send({
+                content: 'Learn Typescript',
+                done: true
+            })
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(404, done)
+    });
+
+    it('respond with single modified todo', async ()=> 
+        request(app)
+            .put(`/api/v1/todos/${id}`)
+            .send({
+                content: 'Learn Java',
+                done: false
+            })
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .then(response=> {
+                expect(response.body).toHaveProperty('_id');
+                expect(response.body).toHaveProperty('content');
+                expect(response.body).toHaveProperty('done');
+                expect(response.body._id).toBe(id);
+                expect(response.body.content).toBe('Learn Java');
+            })
+    )
+});
+
+describe('DELETE /api/v1/todos/:id', ()=> {
+    it('respond with invalid object error', (done)=> {
+        request(app)
+            .delete(`/api/v1/todos/6adsdwdw`)
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(422, done);
+    })
+
+    it('respond with 404 not found', (done)=> {
+        request(app)
+            .delete(`/api/v1/todos/6306d061477bdb46f9c57fa4`)
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(404, done);
+    })
+
+    it('respond with 204', async ()=> 
+        request(app)
+            .delete(`/api/v1/todos/${id}`)
+            .expect(204)
+    );
+
+    it('respond with a not found error', (done)=> {
+        request(app)
+            .get(`/api/v1/todos/${id}`)
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(404, done);
+    })
 })

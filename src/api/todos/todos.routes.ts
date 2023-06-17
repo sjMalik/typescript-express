@@ -14,5 +14,12 @@ router.post('/', validateRequest({
 router.get('/:id', validateRequest({
     params: ParamsWithId
 }), TodoHandler.findOne);
+router.put('/:id', validateRequest({
+    params: ParamsWithId,
+    body: Todo
+}), TodoHandler.updateOne);
+router.delete('/:id', validateRequest({
+    params: ParamsWithId
+}), TodoHandler.deleteOne)
 
 export default router;

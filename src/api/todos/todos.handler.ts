@@ -7,8 +7,7 @@ import { ObjectId } from "mongodb";
 // Using generics on the Request and Response object
 export async function findAll(req: Request, res: Response<TodoWithId[]>, next: NextFunction) {
     try{
-        const result = await Todos.find();
-        const todos = await result.toArray();
+        const todos = await Todos.find().toArray();
         res.json(todos);
     }catch(err){
         next(err)
@@ -44,5 +43,39 @@ export async function findOne(req: Request<ParamsWithId, TodoWithId, {}>, res: R
         res.json(result)
     }catch(err){
         next(err)
+    }
+}
+
+export async function updateOne(req: Request<ParamsWithId, TodoWithId, Todo>, res: Response<TodoWithId>, next: NextFunction) {
+    try{
+        const result = await Todos.findOneAndUpdate({
+            _id: new ObjectId(req.params.id)
+        }, {
+            $set: req.body
+        }, {
+            returnDocument: 'after'
+        });
+        if(!result.value) {
+            res.status(404);
+            throw new Error(`${req.params.id} not found`)
+        }
+        res.json(result.value)
+    }catch(err){
+        next(err)
+    }
+}
+
+export async function deleteOne(req: Request<ParamsWithId, {}, {}>, res: Response<{}>, next: NextFunction) {
+    try{
+        const result = await Todos.findOneAndDelete({
+            _id: new ObjectId(req.params.id)
+        })
+        if(!result.value) {
+            res.status(404);
+            throw new Error(`${req.params.id} not found`)
+        }
+        res.status(204).end();
+    }catch(err){
+        next(err);
     }
 }
