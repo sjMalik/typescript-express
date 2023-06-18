@@ -47,3 +47,7 @@ Zod is designed to be as developer-friendly as possible. The goal is to eliminat
     - `npm i typescript ts-node nodemon -D`
 3. initiate typescript project
     - `npx tsc --init`
+
+
+# Swagger URL: 
+http://localhost:5000/api-docs

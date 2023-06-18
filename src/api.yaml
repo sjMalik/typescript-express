@@ -1,0 +1,65 @@
+swagger: "2.0"
+info:
+  title: Express Typescript API
+  description: Typescript CRUD Apis
+  version: 1.0
+  contact:
+    email: surajit94malik@gmail.com
+  liscence:
+    name: Test
+    url: test.com
+  servers:
+    -url: http://localhost:5000
+    description: This is my local server
+    -url: http://example.com
+    description: This is production url
+schemes: [http, https]
+
+paths:
+#Returns a User
+  /api/v1/todos:
+    get:
+      summary: Get List of Todos
+      description: Respond with array of todos
+      responses:
+        200:
+          description: Successful Response
+          schema:
+            $ref: "#/components/schemas/Todo"
+        400:
+          description: Bad Request
+    post:
+      summmary: Create a new Todo
+      description: Repsond with a new todo
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: object
+            required:
+              - content
+              - done
+            properties:
+              content:
+                type: string
+              done:
+                type: boolean
+      responses:
+        200:
+          description: Successful Response
+          schema:
+            $ref: "#/components/schemas/Todo"
+
+components:
+  schemas:
+    Todo:
+      type: object
+      required:
+        - content
+      properties:
+        _id:
+          type: string
+        content:
+          type: string
+        done:
+          type: boolean
