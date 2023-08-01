@@ -51,3 +51,5 @@ Zod is designed to be as developer-friendly as possible. The goal is to eliminat
 
 # Swagger URL: 
 http://localhost:5000/api-docs
+
+Referenece: https://github.com/syed-ashraf123/swagger-express/tree/master
